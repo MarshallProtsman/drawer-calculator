@@ -1,25 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
+import Input from "./inputs";
+// import Total from "./total";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class Calculator extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isCalced: false,
+      hundred: "",
+      dollars: {
+        fifty: "",
+        twenty: "4",
+        ten: "",
+        five: "",
+        one: "",
+      },
+      value: "",
+      ammount: "",
+      total: 0,
+    };
+
+    this.handleCalc = this.handleCalc.bind(this);
+  }
+
+  handleCalc() {
+    this.setState((state) => ({
+      total: this.state.hundred * 100 + this.state.dollars.twenty * 20,
+      isCalced: !state.isCalced,
+    }));
+    console.log({ ...this.state.dollars });
+  }
+
+  render() {
+    return (
+      <>
+        <h1>Drawer Calculator</h1>
+
+        <br></br>
+        <Input
+        // handleChange={this.handleChange}
+        // ammount={this.state.ammount}
+        // handleSubmit={this.handleSubmit}
+        />
+        <button onClick={this.handleCalc}>
+          {this.state.isCalced ? this.state.total : "Click for Total"}
+        </button>
+      </>
+    );
+  }
 }
 
-export default App;
+export default Calculator;
